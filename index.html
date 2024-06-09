@@ -69,7 +69,6 @@
 <div id="mainContainer" class="container">
     <h1>EAMCET Counselling</h1>
 
-    <!-- Login Page -->
     <div id="loginPage">
         <h2>Login</h2>
         <label for="email">Email:</label>
@@ -80,7 +79,6 @@
         <button onclick="showSignUp()">Sign Up Instead</button>
     </div>
 
-    <!-- Sign Up Page -->
     <div id="signUpPage" class="hidden">
         <h2>Sign Up</h2>
         <label for="signUpEmail">Email:</label>
@@ -91,7 +89,6 @@
         <button onclick="showLogin()">Back to Login</button>
     </div>
 
-    <!-- Main Page with Options -->
     <div id="mainPage" class="hidden">
         <h2>Welcome, <span id="studentNameDisplay"></span></h2>
         <p>Email: <span id="studentEmailDisplay"></span></p>
@@ -102,7 +99,6 @@
         </div>
     </div>
 
-    <!-- Student Registration Page -->
     <div id="studentDetailsPage" class="hidden">
         <h2>Student Registration</h2>
         <label for="student">Name:</label>
@@ -133,7 +129,6 @@
         <button onclick="goBackToMain()">Previous</button>
     </div>
 
-    <!-- Web Options Page -->
     <div id="webOptionsPage" class="hidden">
         <h2>Web Options</h2>
         <label for="district">District:</label>
@@ -146,7 +141,6 @@
         <button onclick="goBackToMain()">Previous</button>
     </div>
 
-    <!-- College Selection Page -->
     <div id="collegeSelectionPage" class="hidden">
         <h2>Select Colleges and Branches</h2>
         <table>
@@ -156,7 +150,6 @@
                 <th>College Name</th>
                 <th>Branch</th>
             </tr>
-            <!-- Generate 10 rows dynamically -->
             <script>
                 for (let i = 1; i <= 10; i++) {
                     document.write(`
@@ -183,7 +176,6 @@
         <button onclick="goBackToWebOptions()">Previous</button>
     </div>
 
-    <!-- College Prediction Page -->
     <div id="collegePredictionPage" class="hidden">
         <h2>College Prediction</h2>
         <label for="predictionRank">EAMCET Rank:</label>
@@ -204,7 +196,6 @@
                     <th>College</th>
                     <th>Acceptance %</th>
                 </tr>
-                <!-- Prediction results will be appended here -->
             </table>
             <button onclick="downloadPrediction()">Download Prediction</button>
             <button onclick="savePredictionData()">Save Data</button>
@@ -214,117 +205,97 @@
 </div>
 
 <script>
-    // Function to show the Sign Up page
     function showSignUp() {
         document.getElementById('loginPage').classList.add('hidden');
         document.getElementById('signUpPage').classList.remove('hidden');
     }
 
-    // Function to show the Login page
     function showLogin() {
         document.getElementById('loginPage').classList.remove('hidden');
         document.getElementById('signUpPage').classList.add('hidden');
     }
 
-    // Function to handle login
     function login() {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        // Implement login logic here
+
         alert('Logged in successfully');
         document.getElementById('loginPage').classList.add('hidden');
         document.getElementById('mainPage').classList.remove('hidden');
         document.getElementById('studentEmailDisplay').textContent = email;
-        document.getElementById('studentNameDisplay').textContent = "Student"; // Example student name, replace with actual data
-        document.getElementById('studentEmail').value = email; // Set email in student details
-        document.getElementById('studentName').value = "Student"; // Example student name, replace with actual data
+        document.getElementById('studentNameDisplay').textContent = "Student";
+        document.getElementById('studentEmail').value = email; 
+        document.getElementById('studentName').value = "Student"; 
     }
 
-    // Function to handle sign up
     function signUp() {
         const email = document.getElementById('signUpEmail').value;
         const password = document.getElementById('signUpPassword').value;
-        // Implement sign-up logic here
         alert('Signed up successfully');
         showLogin();
     }
-
-    // Function to show Student Registration page
     function showStudentRegistration() {
         document.getElementById('mainPage').classList.add('hidden');
         document.getElementById('studentDetailsPage').classList.remove('hidden');
     }
 
-    // Function to send OTP
     function sendOtp() {
         alert('OTP sent to your registered mobile number');
     }
-
-    // Function to verify OTP
+    
     function verifyOtp() {
         alert('OTP verified successfully');
         document.getElementById('uploadDocuments').classList.remove('hidden');
     }
 
-    // Function to verify documents
     function verifyDocuments() {
         alert('Documents verified successfully');
     }
 
-    // Function to save student data
     function saveStudentData() {
         alert('Student data saved successfully');
         document.getElementById('studentDetailsPage').classList.add('hidden');
         document.getElementById('mainPage').classList.remove('hidden');
     }
 
-    // Function to show Web Options page
     function showWebOptions() {
         document.getElementById('mainPage').classList.add('hidden');
         document.getElementById('webOptionsPage').classList.remove('hidden');
     }
 
-    // Function to show the college selection page
     function showCollegeSelection() {
         document.getElementById('webOptionsPage').classList.add('hidden');
         document.getElementById('collegeSelectionPage').classList.remove('hidden');
     }
 
-    // Function to submit web options
     function submitWebOptions() {
         alert('Web options submitted successfully');
         document.getElementById('collegeSelectionPage').classList.add('hidden');
         document.getElementById('mainPage').classList.remove('hidden');
     }
 
-    // Function to show College Prediction page
     function showCollegePrediction() {
         document.getElementById('mainPage').classList.add('hidden');
         document.getElementById('collegePredictionPage').classList.remove('hidden');
     }
 
-    // Function to predict colleges based on rank and branch
     function predictColleges() {
         const rank = document.getElementById('predictionRank').value;
         const branch = document.getElementById('predictionBranch').value;
-        // Implement prediction logic here based on rank and branch
         document.getElementById('predictionResult').classList.remove('hidden');
         alert('College prediction done successfully');
     }
 
-    // Function to download prediction
     function downloadPrediction() {
         alert('Prediction downloaded successfully');
     }
 
-    // Function to save prediction data
     function savePredictionData() {
         alert('Prediction data saved successfully');
         document.getElementById('collegePredictionPage').classList.add('hidden');
         document.getElementById('mainPage').classList.remove('hidden');
     }
 
-    // Function to go back to Main page
     function goBackToMain() {
         document.getElementById('studentDetailsPage').classList.add('hidden');
         document.getElementById('webOptionsPage').classList.add('hidden');
@@ -333,7 +304,6 @@
         document.getElementById('mainPage').classList.remove('hidden');
     }
 
-    // Function to go back to Web Options page
     function goBackToWebOptions() {
         document.getElementById('collegeSelectionPage').classList.add('hidden');
         document.getElementById('webOptionsPage').classList.remove('hidden');
