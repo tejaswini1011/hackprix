@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EAMCET Counselling</title>
+    <style>
+        body {
+            background-color: lightblue;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+            color: black;
+            font-weight: bold;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<div id="mainContainer" class="container">
+    <h1>EAMCET Counselling</h1>
+
+    <!-- Login Page -->
+    <div id="loginPage">
+        <h2>Login</h2>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <button onclick="login()">Sign In</button>
+        <button onclick="showSignUp()">Sign Up Instead</button>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div id="signUpPage" class="hidden">
+        <h2>Sign Up</h2>
+        <label for="signUpEmail">Email:</label>
+        <input type="email" id="signUpEmail" required>
+        <label for="signUpPassword">Password:</label>
+        <input type="password" id="signUpPassword" required>
+        <button onclick="signUp()">Sign Up</button>
+        <button onclick="showLogin()">Back to Login</button>
+    </div>
+
+    <!-- Main Page with Options -->
+    <div id="mainPage" class="hidden">
+        <h2>Welcome, <span id="studentNameDisplay"></span></h2>
+        <p>Email: <span id="studentEmailDisplay"></span></p>
+        <div class="btn-group">
+            <button onclick="showStudentRegistration()">Student Registration</button>
+            <button onclick="showWebOptions()">Web Options</button>
+            <button onclick="showCollegePrediction()">College Prediction</button>
+        </div>
+    </div>
+
+    <!-- Student Registration Page -->
+    <div id="studentDetailsPage" class="hidden">
+        <h2>Student Registration</h2>
+        <label for="student">Name:</label>
+        <input type="text" id="student" required>
+        <label for="studentEmail">Email:</label>
+        <input type="email" id="studentEmail" disabled>
+        <label for="rank">Rank:</label>
+        <input type="number" id="rank" min="0" max="100000" required>
+        <label for="hallTicket">Hall Ticket Number:</label>
+        <input type="text" id="hallTicket" required>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" required>
+        <button onclick="sendOtp()">Send OTP</button>
+        <label for="otp">OTP:</label>
+        <input type="text" id="otp" required>
+        <button onclick="verifyOtp()">Verify OTP</button>
+
+        <div class="hidden" id="uploadDocuments">
+            <label for="tenthMemo">10th Memo (PDF):</label>
+            <input type="file" id="tenthMemo" accept="application/pdf" required>
+            <label for="interMemo">Inter Memo (PDF):</label>
+            <input type="file" id="interMemo" accept="application/pdf" required>
+            <label for="casteCertificate">Caste Certificate (PDF):</label>
+            <input type="file" id="casteCertificate" accept="application/pdf" required>
+            <button onclick="verifyDocuments()">Verify Documents</button>
+            <button onclick="saveStudentData()">Save Data</button>
+        </div>
+        <button onclick="goBackToMain()">Previous</button>
+    </div>
+
+    <!-- Web Options Page -->
+    <div id="webOptionsPage" class="hidden">
+        <h2>Web Options</h2>
+        <label for="district">District:</label>
+        <input type="text" id="district" required>
+        <label for="city">City:</label>
+        <input type="text" id="city" required>
+        <label for="state">State:</label>
+        <input type="text" id="state" value="Telangana" disabled>
+        <button onclick="showCollegeSelection()">Next</button>
+        <button onclick="goBackToMain()">Previous</button>
+    </div>
+
+    <!-- College Selection Page -->
+    <div id="collegeSelectionPage" class="hidden">
+        <h2>Select Colleges and Branches</h2>
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>College Code</th>
+                <th>College Name</th>
+                <th>Branch</th>
+            </tr>
+            <!-- Generate 10 rows dynamically -->
+            <script>
+                for (let i = 1; i <= 10; i++) {
+                    document.write(`
+                        <tr>
+                            <td>${i}</td>
+                            <td><input type="text" id="collegeCode${i}"></td>
+                            <td><input type="text" id="collegeName${i}"></td>
+                            <td>
+                                <select id="branch${i}">
+                                    <option value="">None Selected</option>
+                                    <option value="CSE">CSE</option>
+                                    <option value="ECE">ECE</option>
+                                    <option value="EEE">EEE</option>
+                                    <option value="IT">IT</option>
+                                    <option value="Mechanical">Mechanical</option>
+                                </select>
+                            </td>
+                        </tr>
+                    `);
+                }
+            </script>
+        </table>
+        <button onclick="submitWebOptions()">Submit</button>
+        <button onclick="goBackToWebOptions()">Previous</button>
+    </div>
+
+    <!-- College Prediction Page -->
+    <div id="collegePredictionPage" class="hidden">
+        <h2>College Prediction</h2>
+        <label for="predictionRank">EAMCET Rank:</label>
+        <input type="number" id="predictionRank" required>
+        <label for="predictionBranch">Branch:</label>
+        <select id="predictionBranch" required>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="IT">IT</option>
+            <option value="Mechanical">Mechanical</option>
+        </select>
+        <button onclick="predictColleges()">Predict</button>
+        <div id="predictionResult" class="hidden">
+            <h3>Prediction Result</h3>
+            <table>
+                <tr>
+                    <th>College</th>
+                    <th>Acceptance %</th>
+                </tr>
+                <!-- Prediction results will be appended here -->
+            </table>
+            <button onclick="downloadPrediction()">Download Prediction</button>
+            <button onclick="savePredictionData()">Save Data</button>
+        </div>
+        <button onclick="goBackToMain()">Previous</button>
+    </div>
+</div>
+
+<script>
+    // Function to show the Sign Up page
+    function showSignUp() {
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('signUpPage').classList.remove('hidden');
+    }
+
+    // Function to show the Login page
+    function showLogin() {
+        document.getElementById('loginPage').classList.remove('hidden');
+        document.getElementById('signUpPage').classList.add('hidden');
+    }
+
+    // Function to handle login
+    function login() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        // Implement login logic here
+        alert('Logged in successfully');
+        document.getElementById('loginPage').classList.add('hidden');
+        document.getElementById('mainPage').classList.remove('hidden');
+        document.getElementById('studentEmailDisplay').textContent = email;
+        document.getElementById('studentNameDisplay').textContent = "Student"; // Example student name, replace with actual data
+        document.getElementById('studentEmail').value = email; // Set email in student details
+        document.getElementById('studentName').value = "Student"; // Example student name, replace with actual data
+    }
+
+    // Function to handle sign up
+    function signUp() {
+        const email = document.getElementById('signUpEmail').value;
+        const password = document.getElementById('signUpPassword').value;
+        // Implement sign-up logic here
+        alert('Signed up successfully');
+        showLogin();
+    }
+
+    // Function to show Student Registration page
+    function showStudentRegistration() {
+        document.getElementById('mainPage').classList.add('hidden');
+        document.getElementById('studentDetailsPage').classList.remove('hidden');
+    }
+
+    // Function to send OTP
+    function sendOtp() {
+        alert('OTP sent to your registered mobile number');
+    }
+
+    // Function to verify OTP
+    function verifyOtp() {
+        alert('OTP verified successfully');
+        document.getElementById('uploadDocuments').classList.remove('hidden');
+    }
+
+    // Function to verify documents
+    function verifyDocuments() {
+        alert('Documents verified successfully');
+    }
+
+    // Function to save student data
+    function saveStudentData() {
+        alert('Student data saved successfully');
+        document.getElementById('studentDetailsPage').classList.add('hidden');
+        document.getElementById('mainPage').classList.remove('hidden');
+    }
+
+    // Function to show Web Options page
+    function showWebOptions() {
+        document.getElementById('mainPage').classList.add('hidden');
+        document.getElementById('webOptionsPage').classList.remove('hidden');
+    }
+
+    // Function to show the college selection page
+    function showCollegeSelection() {
+        document.getElementById('webOptionsPage').classList.add('hidden');
+        document.getElementById('collegeSelectionPage').classList.remove('hidden');
+    }
+
+    // Function to submit web options
+    function submitWebOptions() {
+        alert('Web options submitted successfully');
+        document.getElementById('collegeSelectionPage').classList.add('hidden');
+        document.getElementById('mainPage').classList.remove('hidden');
+    }
+
+    // Function to show College Prediction page
+    function showCollegePrediction() {
+        document.getElementById('mainPage').classList.add('hidden');
+        document.getElementById('collegePredictionPage').classList.remove('hidden');
+    }
+
+    // Function to predict colleges based on rank and branch
+    function predictColleges() {
+        const rank = document.getElementById('predictionRank').value;
+        const branch = document.getElementById('predictionBranch').value;
+        // Implement prediction logic here based on rank and branch
+        document.getElementById('predictionResult').classList.remove('hidden');
+        alert('College prediction done successfully');
+    }
+
+    // Function to download prediction
+    function downloadPrediction() {
+        alert('Prediction downloaded successfully');
+    }
+
+    // Function to save prediction data
+    function savePredictionData() {
+        alert('Prediction data saved successfully');
+        document.getElementById('collegePredictionPage').classList.add('hidden');
+        document.getElementById('mainPage').classList.remove('hidden');
+    }
+
+    // Function to go back to Main page
+    function goBackToMain() {
+        document.getElementById('studentDetailsPage').classList.add('hidden');
+        document.getElementById('webOptionsPage').classList.add('hidden');
+        document.getElementById('collegeSelectionPage').classList.add('hidden');
+        document.getElementById('collegePredictionPage').classList.add('hidden');
+        document.getElementById('mainPage').classList.remove('hidden');
+    }
+
+    // Function to go back to Web Options page
+    function goBackToWebOptions() {
+        document.getElementById('collegeSelectionPage').classList.add('hidden');
+        document.getElementById('webOptionsPage').classList.remove('hidden');
+    }
+</script>
+
+</body>
+</html>
